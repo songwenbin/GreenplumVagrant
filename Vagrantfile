@@ -17,25 +17,25 @@ Vagrant.configure(2) do |config|
   config.vm.define "sdw1" do |sdw1|
     sdw1.vm.box = "centos67"
     sdw1.vm.hostname = "sdw1"
-    sdw1.vm.network "private_network", ip: "192.168.1.101"
+    sdw1.vm.network "private_network", ip: "192.168.2.101"
     sdw1.vm.provision :shell, path: "provision.sh"
   end 
   config.vm.define "sdw2" do |sdw2|
     sdw2.vm.box = "centos67"
     sdw2.vm.hostname = "sdw2"
-    sdw2.vm.network "private_network", ip: "192.168.1.102"
+    sdw2.vm.network "private_network", ip: "192.168.2.102"
     sdw2.vm.provision :shell, path: "provision.sh"
   end 
   config.vm.define "sdw3" do |sdw3|
     sdw3.vm.box = "centos67"
     sdw3.vm.hostname = "sdw3"
-    sdw3.vm.network "private_network", ip: "192.168.1.103"
+    sdw3.vm.network "private_network", ip: "192.168.2.103"
     sdw3.vm.provision :shell, path: "provision.sh"
   end 
   config.vm.define "mdw" do |mdw|
     mdw.vm.box = "centos67"
     mdw.vm.hostname = "mdw"
-    mdw.vm.network "private_network", ip: "192.168.1.100"
+    mdw.vm.network "private_network", ip: "192.168.2.100"
     mdw.vm.provision :shell, path: "provision.sh"
   end 
 

@@ -1,6 +1,5 @@
 # firewall close
 service iptables stop
-sudo yum -y install expect
 
 # User Config
 groupadd -g 530 gpadmin
@@ -10,10 +9,10 @@ echo "gpadmin"|passwd --stdin gpadmin
 
 mkdir -p /home/gpadmin/conf
 # Hostname Config
-echo "192.168.1.100 mdw"  >> /etc/hosts
-echo "192.168.1.101 sdw1" >> /etc/hosts
-echo "192.168.1.102 sdw2" >> /etc/hosts
-echo "192.168.1.103 sdw3" >> /etc/hosts
+echo "192.168.2.100 mdw"  >> /etc/hosts
+echo "192.168.2.101 sdw1" >> /etc/hosts
+echo "192.168.2.102 sdw2" >> /etc/hosts
+echo "192.168.2.103 sdw3" >> /etc/hosts
 
 # SSH Config
 echo "mdw"  >> /home/gpadmin/conf/hostlist
@@ -30,12 +29,13 @@ mkdir /opt/greenplum
 chown -R gpadmin:gpadmin /opt/greenplum
 chown -R gpadmin:gpadmin /opt
 
-/vagrant/gp.sh greenplum-db-4.3.6.2-build-1-RHEL5-x86_64.bin
+# GreenPlum Install
+/vagrant/gp.sh $GPBIN
 
-echo "source /opt/greenplum/greenplum_path.sh" >> /home/gpadmin/.bash_profile
+echo "source /opt/greenplum/greenplum_path.sh" >> /home/gpadmin/.bashrc
 echo "source /opt/greenplum/greenplum_path.sh" >> /etc/profile
 echo "export MASTER_DATA_DIRECTORY=/home/gpadmin/gpdata/gpmaster/gpseg-1" >> /etc/profile
-echo "export MASTER_DATA_DIRECTORY=/home/gpadmin/gpdata/gpmaster/gpseg-1" >> /home/gpadmin/.bash_profile
+echo "export MASTER_DATA_DIRECTORY=/home/gpadmin/gpdata/gpmaster/gpseg-1" >> /home/gpadmin/.bashrc
 source /opt/greenplum/greenplum_path.sh
 cp $GPHOME/docs/cli_help/gpconfigs/gpinitsystem_config /home/gpadmin/gpinitsystem_config
 
